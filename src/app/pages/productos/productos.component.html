@@ -1,0 +1,102 @@
+<div class="row animated fadeIn">
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Nombre de empresa:</h4>
+                <h6 class="card-subtitle">{{ empresa }}</h6>
+                <br>
+                <h4 class="card-title">Instituto:</h4>
+                <label *ngIf="instituto == 1 || instituto == 2" class="label label-info ">
+                    <i class="flag-icon flag-icon-mx"></i>
+                    MÉXICO
+                </label>
+                <label *ngIf="instituto == 3" class="label label-info ">
+                    <i class="flag-icon flag-icon-hk"></i>
+                    CHINA HK
+                </label>
+                <label *ngIf="instituto == 5" class="label label-info ">
+                    <i class="flag-icon flag-icon-sg"></i>
+                    SINGAPUR
+                </label>
+                <label *ngIf="instituto == 4" class="label label-info ">
+                    <i class="flag-icon flag-icon-ph"></i>
+                    Filipinas
+                </label>
+                <label *ngIf="instituto == 7" class="label label-info ">
+                    <i class="flag-icon flag-icon-tr"></i>
+                    Turquía
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-body" align="center">
+                <h4 class="card-title">Logo</h4>
+                <img [src]="empresaId | imagen: 'empresa'" class="w150">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn " *ngIf="cargando ">
+    <div class="col-sm-12 ">
+        <div class="alert alert-warning text-center ">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x "></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn " *ngIf="!cargando ">
+    <div class="col-12 ">
+        <div class="card ">
+            <div class="card-body ">
+
+                <h3 class="card-title ">Productos de Certificación ( <small>{{ productos.length }}</small> )</h3>
+                <table class="table color-table danger-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>
+                                <i class="fa fa-calendar"></i> Fecha de aplicación
+                            </th>
+                            <th>Estatus</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let producto of productos ">
+                            <td>
+                                {{ producto.nombreProducto }}
+                            </td>
+                            <td>
+                                {{ producto.fechaCertificar }}
+                            </td>
+                            <label *ngIf="producto.completoCertificar == 1" class="label label-danger ">
+                                <i class="icon icon-close"></i>
+                                No completado
+                            </label>
+                            <label *ngIf="producto.completoCertificar == 2" class="label label-success ">
+                                <i class="icon icon-check"></i>
+                                Completo
+                            </label>
+                            <td>
+                                <button class="btn btn-danger espacios">
+                                    <i class="fa fa-trash-o "></i>
+                                </button>
+                                <button [routerLink]="['/proceso-encuesta', producto.idCertificar, producto.fechaCertificar, empresa, empresaId]" class="btn btn-info espacios">
+                                    Ver proceso
+                                    <i class="mdi mdi-dots-horizontal"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,8 +14,26 @@
     width: 50px;
 }
 
+.img-60 {
+    width: 80px;
+}
+
+.icon-50 {
+    width: 50px !important;
+    height: 50px !important;
+}
+
 .w70 {
     width: 70px;
+}
+
+.centrar {
+    display: block;
+    text-align: center;
+}
+
+.ocultar {
+    display: none;
 }
 
 .fondo-negro {
@@ -30,4 +48,8 @@
 
 .oculto {
     display: none;
+}
+
+.espacios {
+    margin-left: 10px;
 }

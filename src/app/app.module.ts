@@ -21,7 +21,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Servicios
 import { ServiceModule } from './services/service.module';
 
-
+// Sockets
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+const config: SocketIoConfig = {
+  url: 'http://localhost:3500',
+  options: {} };
 
 
 @NgModule({
@@ -37,7 +41,8 @@ import { ServiceModule } from './services/service.module';
     PagesModule,
     FormsModule,
     ReactiveFormsModule,
-    ServiceModule
+    ServiceModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
   ],

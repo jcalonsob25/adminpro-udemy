@@ -1,0 +1,97 @@
+<div class="row animated fadeIn ">
+    <div class="col-12 ">
+        <div class="card ">
+            <div class="card-body table-responsive ">
+                <label class="label label-info">Pagina: </label>
+                <button (click)="cambiarPagina(prevPage)" [disabled]="!anterior" class="btn btn-secondary espacios">
+                    <i class="fa fa-angle-double-left"></i>
+                </button>
+                <label class="espacios">
+                    {{ pagina }}
+                </label>
+                <button (click)="cambiarPagina(nextPage)" [disabled]="!siguiente" class="btn btn-secondary espacios">
+                    <i class="fa fa-angle-double-right"></i>
+                </button>
+                <button (click)="actualizarLogs()" class="btn btn-success espacios">
+                    <i class="mdi mdi-cached"></i>
+                </button>
+                <i class="fa fa-search espacios"></i><input #input (keyup)="buscar(input.value)" type=" text " class="espacios" placeholder="Buscar...">
+                <img src="assets/images/logo-cgo.png" alt="homepage" class="dark-logo img-50 espacios" />
+                <hr>
+                <div class="row animated fadeIn " *ngIf="cargando ">
+                    <div class="col-sm-12 ">
+                        <div class="alert alert-warning text-center ">
+                            <strong>Cargando</strong>
+                            <br>
+                            <i class="fa fa-refresh fa-spin fa-2x "></i>
+                            <br>
+                            <span>Espere por favor</span>
+                        </div>
+                    </div>
+                </div>
+                <table *ngIf="!cargando " class="table color-table danger-table">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>IP Cliente</th>
+                            <th>Usuario</th>
+                            <th>Empresa</th>
+                            <th>Plataforma</th>
+                            <th>Estatus</th>
+                            <th>Resultado</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let log of logs">
+                            <td class="w70">
+                                <img *ngIf="log.companyCGO != null" [src]="log.companyCGO._id | imagen: 'empresa'" class="img-50 img-circle pointer">
+                                <i *ngIf="log.userCGO != null && log.companyCGO == null" class="fa fa-user-circle fa-2x"></i>
+                            </td>
+                            <td>
+                                {{ log.host }}
+                            </td>
+                            <td>
+                                <label *ngIf="log.userCGO != null"> {{ log.userCGO.user }} </label>
+                                <label *ngIf="log.userCGO == null" class="label label-success  centrar">
+                                    -----------
+                                </label>
+                            </td>
+                            <td>
+                                <label *ngIf="log.companyCGO != null"> {{ log.companyCGO.datosEmpresa.nombreEmpresa }} </label>
+                                <label *ngIf="log.companyCGO == null" class="label label-success centrar">
+                                    -----------
+                                </label>
+                            </td>
+                            <td>
+                                <img *ngIf="log.platform === 'CGO'" src="assets/images/logo-cgo.png" alt="homepage" class="dark-logo img-50 espacios" />
+                            </td>
+                            <td>
+                                <label *ngIf="!log.success" class="label label-danger centrar">
+                                    Error
+                                </label>
+                                <label *ngIf="log.success" class="label label-success centrar">
+                                    Success
+                                </label>
+                            </td>
+                            <td>
+                                <label *ngIf="!log.success">
+                                    {{ log.error }}
+                                </label>
+                                <label *ngIf="log.success">
+                                    {{ log.action }}
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    {{log.createdAt}}
+                                </label>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

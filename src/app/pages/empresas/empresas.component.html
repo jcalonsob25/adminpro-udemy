@@ -1,0 +1,103 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarEmpresa(input.value)" type=" text " class="form-control " placeholder="Buscar empresa... ">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row animated fadeIn " *ngIf="cargando ">
+    <div class="col-sm-12 ">
+        <div class="alert alert-warning text-center ">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x "></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+
+<div class="row animated fadeIn " *ngIf="!cargando ">
+    <div class="col-12 ">
+        <div class="card ">
+            <div class="card-body ">
+
+                <h3 class="card-title ">Empresas registradas ( <small>{{ totalRegistros }}</small> )</h3>
+                <button (click)="cambiarPagina(-1)" [disabled]="!anterior" class="btn btn-secondary">
+                    Anteriores
+                </button>
+                <button (click)="cambiarPagina(1)" [disabled]="!siguiente" class="btn btn-secondary espacios">
+                    Siguientes
+                </button>
+                <br>
+                <br>
+                <table class="table color-table danger-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <i class="fa fa-image"></i> Logo
+                            </th>
+                            <th>
+                                <i class="fa fa-building-o"></i> Nombre de Empresa
+                            </th>
+                            <th>
+                                Instituto
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let empresa of empresas ">
+                            <td class="w70">
+                                <img [src]="empresa._id | imagen: 'empresa'" class="img-50 img-circle pointer">
+                            </td>
+                            <td>
+                                {{empresa.datosEmpresa.nombreEmpresa}}
+                            </td>
+                            <td>
+                                <label *ngIf="empresa.datosEmpresa.institutoEmpresa == 1 || empresa.datosEmpresa.institutoEmpresa == 2" class="label label-info ">
+                                    <i class="flag-icon flag-icon-mx"></i>
+                                    MÉXICO
+                                </label>
+                                <label *ngIf="empresa.datosEmpresa.institutoEmpresa == 3" class="label label-info ">
+                                    <i class="flag-icon flag-icon-hk"></i>
+                                    CHINA HK
+                                </label>
+                                <label *ngIf="empresa.datosEmpresa.institutoEmpresa == 5" class="label label-info ">
+                                    <i class="flag-icon flag-icon-sg"></i>
+                                    SINGAPUR
+                                </label>
+                                <label *ngIf="empresa.datosEmpresa.institutoEmpresa == 4" class="label label-info ">
+                                    <i class="flag-icon flag-icon-ph"></i>
+                                    Filipinas
+                                </label>
+                                <label *ngIf="empresa.datosEmpresa.institutoEmpresa == 7" class="label label-info ">
+                                    <i class="flag-icon flag-icon-tr"></i>
+                                    Turquía
+                                </label>
+                            </td>
+                            <td>
+                                <button [routerLink]="['/productos', empresa.datosEmpresa.nombreEmpresa, empresa._id, empresa.datosEmpresa.institutoEmpresa]" class="btn btn-info espacios">
+                                    <i class="mdi mdi-cart"></i>
+                                    Ver productos
+                                </button>
+                                <button (click)="borrarEmpresa(empresa.datosEmpresa.nombreEmpresa, empresa._id)" class="btn btn-danger espacios">
+                                    <i class="fa fa-trash-o "></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
