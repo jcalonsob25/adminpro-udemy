@@ -55,47 +55,147 @@
     <div class="col-12 ">
         <div class="card ">
             <div class="card-body ">
+                <h4 class="card-title">Productos de la empresa</h4>
+                <!-- Nav tabs -->
+                <div class="vtabs ">
+                    <ul class="nav nav-tabs tabs-vertical" role="tablist">
+                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#certificar" role="tab"><span>Certificar</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile9" role="tab"><span>Medir</span></a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#messages9" role="tab"><span>Norma 35</span></a> </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="certificar" role="tabpanel">
+                            <table class="table color-table danger-table">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>
+                                            <i class="fa fa-calendar"></i> Fecha de aplicación
+                                        </th>
+                                        <th>Estatus</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let producto of productos ">
+                                        <td>
+                                            {{ producto.nombreProducto }}
+                                        </td>
+                                        <td>
+                                            {{ producto.fechaCertificar }}
+                                        </td>
+                                        <td>
+                                            <label *ngIf="producto.completoCertificar == 1" class="label label-danger ">
+                                                <i class="icon icon-close"></i>
+                                                No completado
+                                            </label>
+                                            <label *ngIf="producto.completoCertificar == 2" class="label label-success ">
+                                                <i class="icon icon-check"></i>
+                                                Completo
+                                            </label>
+                                        </td>
 
-                <h3 class="card-title ">Productos de Certificación ( <small>{{ productos.length }}</small> )</h3>
-                <table class="table color-table danger-table">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>
-                                <i class="fa fa-calendar"></i> Fecha de aplicación
-                            </th>
-                            <th>Estatus</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let producto of productos ">
-                            <td>
-                                {{ producto.nombreProducto }}
-                            </td>
-                            <td>
-                                {{ producto.fechaCertificar }}
-                            </td>
-                            <label *ngIf="producto.completoCertificar == 1" class="label label-danger ">
-                                <i class="icon icon-close"></i>
-                                No completado
-                            </label>
-                            <label *ngIf="producto.completoCertificar == 2" class="label label-success ">
-                                <i class="icon icon-check"></i>
-                                Completo
-                            </label>
-                            <td>
-                                <button class="btn btn-danger espacios">
-                                    <i class="fa fa-trash-o "></i>
-                                </button>
-                                <button [routerLink]="['/proceso-encuesta', producto.idCertificar, producto.fechaCertificar, empresa, empresaId]" class="btn btn-info espacios">
-                                    Ver proceso
-                                    <i class="mdi mdi-dots-horizontal"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                        <td>
+                                            <button class="btn btn-danger espacios">
+                                            <i class="fa fa-trash-o "></i>
+                                        </button>
+                                            <button [routerLink]="['/proceso-encuesta', producto.idCertificar, producto.fechaCertificar, empresa, empresaId, 1]" class="btn btn-info espacios">
+                                            Ver proceso
+                                            <i class="mdi mdi-dots-horizontal"></i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane  " id="profile9" role="tabpanel">
+                            <table class="table color-table danger-table">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>
+                                            <i class="fa fa-calendar"></i> Fecha de aplicación
+                                        </th>
+                                        <th>Estatus</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let producto of productosMedir ">
+                                        <td>
+                                            Medir
+                                        </td>
+                                        <td>
+                                            {{ producto.fechaMedir }}
+                                        </td>
+                                        <td>
+                                            <label *ngIf="producto.completoMedir == 1" class="label label-danger ">
+                                                <i class="icon icon-close"></i>
+                                                No completado
+                                            </label>
+                                            <label *ngIf="producto.completoMedir == 2" class="label label-success ">
+                                                <i class="icon icon-check"></i>
+                                                Completo
+                                            </label>
+                                        </td>
+
+                                        <td>
+                                            <button class="btn btn-danger espacios">
+                                            <i class="fa fa-trash-o "></i>
+                                        </button>
+                                            <button [routerLink]="['/proceso-encuesta', producto.idMedir, producto.fechaMedir, empresa, empresaId, 2]" class="btn btn-info espacios">
+                                            Ver proceso
+                                            <i class="mdi mdi-dots-horizontal"></i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="messages9" role="tabpanel">
+                            <table class="table color-table danger-table">
+                                <thead>
+                                    <tr>
+                                        <th>Producto</th>
+                                        <th>
+                                            <i class="fa fa-calendar"></i> Fecha de aplicación
+                                        </th>
+                                        <th>Estatus</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let producto of productosNorma">
+                                        <td>
+                                            Norma 35
+                                        </td>
+                                        <td>
+                                            {{ producto.fechaNorma35 }}
+                                        </td>
+                                        <label *ngIf="producto.completoNorma35 == 1" class="label label-danger ">
+                                        <i class="icon icon-close"></i>
+                                        No completado
+                                    </label>
+                                        <label *ngIf="producto.completoNorma35 == 2" class="label label-success ">
+                                        <i class="icon icon-check"></i>
+                                        Completo
+                                    </label>
+                                        <td>
+                                            <button class="btn btn-danger espacios">
+                                            <i class="fa fa-trash-o "></i>
+                                        </button>
+                                            <button [routerLink]="['/proceso-encuesta', producto.idNorma35, producto.fechaNorma35, empresa, empresaId]" class="btn btn-info espacios">
+                                            Ver proceso
+                                            <i class="mdi mdi-dots-horizontal"></i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

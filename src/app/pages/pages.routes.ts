@@ -32,7 +32,7 @@ const pagesRoutes: Routes = [
             { path: 'usuarios', component: UsuariosComponent, data: { titulo: 'Mantenimiento de usuarios'}},
             { path: 'empresas', component: EmpresasComponent, data: { titulo: 'Consultar empresas'}},
             { path: 'productos/:empresa/:empresaId/:instituto', component: ProductosComponent, data: {titulo: 'Consultar productos'}},
-            { path: 'proceso-encuesta/:idprod/:fecha/:empresa/:empresaId', component: ProcesoEncuestaComponent, data: {titulo: 'Proceso de encuesta'}},
+            { path: 'proceso-encuesta/:idprod/:fecha/:empresa/:empresaId/:tipo', component: ProcesoEncuestaComponent, data: {titulo: 'Proceso de encuesta'}},
             { path: 'consultar-log', component: LogsComponent, data: {titulo: 'Log del Sistema'}}
         ]
     }

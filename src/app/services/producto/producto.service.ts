@@ -14,11 +14,26 @@ export class ProductoService {
     return this.http.get(url);
   }
 
-  getEstatusPasos(empresaId: string, fechaCertificar: number){
-    const url = URL_SERVICIOS_CGO + '/Certificar/estatusGET/' + empresaId;
-    const data = {
-      fechaCertificar
-    };
+  getEstatusPasos(empresaId: string, fechaCertificar: number, tipo: string, productoId: string){
+    console.log(tipo);
+    let url: any;
+    const urlCertificar = URL_SERVICIOS_CGO + '/Certificar/estatusGET/' + empresaId;
+    const urlMedir = URL_SERVICIOS_CGO + '/Medir/estatusGET/' + empresaId;
+    let data = {};
+    switch (tipo){
+      case '1':
+        data = {
+          fechaCertificar
+        };
+        url = urlCertificar;
+        break;
+      case '2':
+        data = {
+          productoId
+        };
+        url = urlMedir;
+        break;
+    }
     return this.http.post(url, data);
   }
 

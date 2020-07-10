@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductoService } from '../../services/producto/producto.service';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-proceso-encuesta',
@@ -13,6 +13,7 @@ export class ProcesoEncuestaComponent implements OnInit {
   empresaId: string;
   productoId: string;
   fecha: number;
+  tipo: string;
   idiomas: boolean = false;
   nps: boolean = false;
   reactivos: boolean = false;
@@ -32,13 +33,16 @@ export class ProcesoEncuestaComponent implements OnInit {
     this.empresaId = this.rutaActiva.snapshot.params.empresaId;
     this.productoId = this.rutaActiva.snapshot.params.idprod;
     this.fecha = this.rutaActiva.snapshot.params.fecha;
+    this.tipo = this.rutaActiva.snapshot.params.tipo;
     this.getEstatusPasos();
   }
 
   getEstatusPasos(){
     console.log('Consultando estatus de pasos');
     this.cargando = true;
-    this._productoService.getEstatusPasos(this.empresaId, this.fecha)
+    console.log(this.fecha);
+    console.log(this.tipo);
+    this._productoService.getEstatusPasos(this.empresaId, this.fecha, this.tipo, this.productoId)
     .subscribe( (resp: any) => {
       console.log(resp);
       if(resp.estatusSecciones.idiomas === 2){

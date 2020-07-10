@@ -13,6 +13,10 @@ export class ProductosComponent implements OnInit {
   empresaId: string;
   instituto: number;
   productos: [];
+  productosCertificar: [];
+  productosMedir: [];
+  productosNorma: [];
+  productosPulseCheck: [];
   cargando: boolean = true;
   constructor(private rutaActiva: ActivatedRoute, public productoService: ProductoService) { }
 
@@ -29,7 +33,12 @@ export class ProductosComponent implements OnInit {
     this.cargando = true;
     this.productoService.cargarProductos(this.empresaId)
     .subscribe((resp: any ) => {
+      console.log(resp);
       this.productos = resp.productosCertificar;
+      this.productosCertificar = resp.productosCertificar;
+      this.productosMedir = resp.productosMedir;
+      this.productosNorma = resp.productosNorma35;
+      this.productosPulseCheck = resp.productosPulseCheck;
       console.log(this.productos);
       this.cargando = false;
     });
