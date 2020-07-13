@@ -46,5 +46,5 @@ export class ProductoService {
   reiniciarProceso(empresaId: string, data: any){
     const url = URL_SERVICIOS_CGO + '/Certificar/reiniciar/' + empresaId;
     return this.http.post(url, data);
-  }
+  } // comentario
 }
